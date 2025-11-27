@@ -1,0 +1,31 @@
+---
+layout: layout.njk
+pagination:
+  data: categories
+  size: 1
+  alias: category
+permalink: "/filmes/categorias/{{ category.title | slug }}/index.html"
+---
+
+<h1>{{ category.title  }}</h1>
+
+<div class="grid justify-center text-sm items-center p-4">
+  <amp-base-carousel
+    width="1200"
+    height="450"
+    class="sm:!w-[1200px] !w-[330px]"
+    layout="flex-item"
+    visible-count="(min-width: 800px) 4, 2"
+    advance-count="(min-width: 800px) 4, 2">
+    {% for movie in movies -%}
+      {% if movie.categories and category.title in movie.categories %}
+      <a href="/filmes/{{movie.slug}}/">
+        <div class="flex flex-col gap-1 p-1">
+          <img src="{{movie.coverImage}}" width="226" height="316" alt="{{movie.title}}"></img>
+          <h1>{{ movie.title }}</h1>
+        </div>
+      </a>
+      {% endif %}
+    {%- endfor %}
+  </amp-base-carousel>
+</div>

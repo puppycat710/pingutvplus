@@ -1,0 +1,81 @@
+<style amp-custom="amp-custom">
+  * {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    list-style-type: none;
+    text-decoration: none;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  /* ===== Scrollbar CSS ===== */
+  *::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px black;
+    border-radius: 10px;
+    background-color: white;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    background-color: black;
+  }
+  *::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 1px #0097b2;
+    background-color: #0097b2;
+  }
+  /* ===== Scrollbar CSS ===== */
+  html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #181a1b;
+    color: white;
+    font-weight: 500;
+    font-family: system-ui;
+  }
+  .pingu-title {
+    font-variant-numeric: tabular-nums;
+    font-variant-caps: small-caps;
+  }
+  .balls {
+    background-color: #a0a0a0;
+    content: "";
+    display: inline-block;
+    height: 0.25rem;
+    line-height: 1;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 0.25rem;
+  }
+  amp-mega-menu .menu-item[open] > span {
+    background-color: #0097b2;
+  }
+  .checkbox-container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  input[type="radio"] {
+    display: none;
+  }
+  .text-checkbox {
+    padding: 8px 20px;
+    background-color: #333; /* Default dark background */
+    color: white;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+  input[type="radio"]:checked + .text-checkbox {
+    background-color: #fff;
+    color: #000;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>

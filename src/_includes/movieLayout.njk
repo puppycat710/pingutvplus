@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html amp lang="pt-br">
+  <head>
+    {% include "seo.njk" %}
+    {% include "seoMovie.njk" %}
+    <!-- AMP -->
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    <script async custom-element="amp-mega-menu" src="https://cdn.ampproject.org/v0/amp-mega-menu-0.1.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% include "styles.njk" %}
+    <style amp-boilerplate>
+      body {
+        -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      }
+      @-webkit-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+    </style>
+    <noscript>
+      <style amp-boilerplate>
+        body {
+          -webkit-animation: none;
+          -moz-animation: none;
+          -ms-animation: none;
+          animation: none;
+        }
+      </style>
+    </noscript>
+    {% include "adsense.njk" %}
+  </head>
+  <body>
+    {% include "headerMenu.njk" %}
+    {{ content | safe }}
+    {% include "footer.njk" %}
+    <!-- Carregue o JS após o HTML -->
+    <script defer src="/js/monetag-vignatte.js" defer></script>
+    <script defer src="/js/render-banner.js" defer></script>
+    <script defer src="/js/disqus.js" defer></script>
+    <script defer src="/js/search.js" defer></script>
+    <script defer src="/js/amp.js" defer></script>
+  </body>
+</html>

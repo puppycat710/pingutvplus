@@ -1,0 +1,84 @@
+<script
+  defer="defer"
+  disable-devtool-auto="disable-devtool-auto"
+  src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script>
+  try {
+    window.disableDevtool = new DisableDevtool({
+      ondevtoolopen: function (type) {
+        console.log(type + ' is open');
+        window.opener = null;
+        window.open('', '_self');
+        try {
+          window.close();
+        } catch (closeError) {
+          console.error("Error closing window:", closeError);
+        }
+        window.history.back();
+      },
+      ondevtoolclose: function (type) {
+        console.log(type + ' is closed');
+      },
+      oninit: function () {
+        console.log('DisableDevtool initialized');
+      }
+    });
+  } catch (error) {
+    console.error("Error initializing DisableDevtool:", error);
+  }
+</script>
+<script>
+  function closeWindow() {
+    window.opener = null;
+    window.open('', '_self');
+    window.close();
+    window.history.back();
+  }
+  document.onkeydown = function (e) {
+    if (event.keyCode == 123) {
+      closeWindow()
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+      closeWindow()
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+      closeWindow()
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+      closeWindow()
+      return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+      closeWindow()
+      return false;
+    }
+  }
+</script>
+<script>
+  var message = "Desculpe, o clique com o botão direito foi desativado.";
+  function clickIE() {
+    if (document.all) {
+      (message);
+      return false;
+    }
+  }
+  function clickNS(e) {
+    if (document.layers || (document.getElementById && !document.all)) {
+      if (e.which == 2 || e.which == 3) {
+        (message);
+        return false;
+      }
+    }
+  }
+  if (document.layers) {
+    document.captureEvents(Event.MOUSEDOWN);
+    document.onmousedown = clickNS;
+  } else {
+    document.onmouseup = clickNS;
+    document.oncontextmenu = clickIE;
+  }
+  document.oncontextmenu = new Function("return false")
+</script>

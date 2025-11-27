@@ -1,0 +1,20 @@
+{
+  "name": "p1ng0tv",
+  "version": "1.0.0",
+  "description": "p1ng0tv",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy && gulp buildDev",
+    "start": "echo Hello World"
+  },
+  "license": "CC BY-ND 4.0",
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.0",
+    "gulp-minify-html": "^0.1.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}

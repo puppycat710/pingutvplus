@@ -1,0 +1,80 @@
+---
+layout: movieLayout.njk
+pagination:
+  data: movies
+  size: 1
+  alias: movie
+permalink: "/filmes/{{ movie.slug }}/"
+---
+
+<div>
+  <div class="flex justify-center">
+    <div
+      style="display: none;"
+      id="serie-banner"
+      class="bg-[url('{{ movie.coverImage }}')] w-full brightness-50 bg-center bg-no-repeat bg-cover flex justify-center hidden">
+      <amp-img loading="lazy" src={{ movie.coverImage }} width="226" height="316" alt={{ movie.title }} layout="responsive"></amp-img>
+    </div>
+  </div>
+  <section class="flex flex-col justify-center items-center">
+    <main
+      class="w-[1200px] p-5 flex xl:flex-row flex-col justify-between xl:items-start items-center bg-[#1F1F1F]">
+      {# SERIE #}
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-2">
+          <h1 class="sm:text-3xl text-lg">{{ movie.title }}</h1>
+          <div>
+            {% if movie.dublado %}
+              <span class="text-[#a0a0a0] text-sm">Dublado</span>
+            {% endif %}
+            <span class="balls"></span>
+            {% if movie.legendado %}
+              <span class="text-[#a0a0a0] text-sm">Legendado</span>
+            {% endif %}
+          </div>
+        </div>
+        {# PLAYER DE VIDEO #}
+        <iframe
+          id="video-frame"
+          class="border-2 border-[#555555]"
+          width="640"
+          height="400"
+          scrolling="no"
+          frameborder="0"
+          allowFullScreen
+          allow="encrypted-media; autoplay; picture-in-picture"
+          src={{ movie.dublado }}></iframe>
+        {# DESCRIÇÃO {{ movie.dublado }} #}
+        <div class="text-sm font-normal w-[640px] text-justify">
+          {{ movie.description }}
+        </div>
+        {# CATEGORIAS E TAGS #}
+        <div class="flex items-center gap-2 text-sm">
+          Categoria:
+          <div class="text-[#3170A5] font-normal font-bold">
+            <a href="/filmes/categorias/todos/" class="hover:text-[#233D5E] active:underline">
+              {% for categoria in movie.categories %}
+                {% set slug = categoria | replace("á", "a") | replace("ã", "a") | replace("â", "a") | replace("é", "e") | replace("ê", "e") | replace("í", "i") | replace("ó", "o") | replace("ô", "o") | replace("õ", "o") | replace("ú", "u") | replace("ç", "c") %}
+                <a href="/filmes/categorias/{{ slug | lower }}/" class="hover:text-[#233D5E] active:underline">
+                  {{ categoria }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {# COMENTARIOS #}
+        <div class="xl:w-[390px] w-[720px] w-full flex flex-col text-center gap-4 py-12">
+          <div id="container-ebf6406200b40ffad6f7de33e59200fa"></div>
+          <p>COMENTARIOS PINGO TV</p>
+          <hr/>
+          <div id="disqus_thread"></div>
+        </div>
+      </div>
+    </main>
+  </section>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.title = '{{ movie.title }}'; // Atribui o título da série
+  });
+</script>

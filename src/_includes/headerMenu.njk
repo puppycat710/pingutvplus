@@ -1,0 +1,120 @@
+<header class="bg-[#141414]">
+  <div class="p-2 flex flex-col items-center gap-3">
+    <div onclick="window.location.href='/'" class="flex items-center justify-center py-1 gap-3 cursor-pointer">
+      {% include "svgLogo.njk" %}
+      <span class="text-xl pingu-title">Pingu TV+</span>
+    </div>
+    <!-- Formulário para capturar o envio com o enter -->
+      <form
+        onsubmit="event.preventDefault();" class="flex justify-center items-center">
+        <!-- Input para o usuário digitar a pesquisa -->
+        <input
+        class="p-2 sm:w-72 w-full rounded-l-lg text-base text-black bg-[#303134]"
+          type="text"
+          id="search-input"
+          required="required"
+          placeholder="Digite o nome do filme ou série..."/>
+        <!-- Botão para redirecionar para a pesquisa no Google -->
+        <a
+          target="_blank"
+          id="searchButton"
+          on="tap:AMP.setState({ search: 2 })">
+          <button
+            id="search-button"
+            class="py-2 px-4 bg-[#0097b2] rounded-r-lg text-white border-none cursor-pointer text-base hover-bg-[#0056b3]"
+            type="button">{% include "svgSearch.njk" %}</button>
+        </a>
+      </form>
+      {# <form
+            onsubmit="event.preventDefault();" class="flex justify-center items-center">
+            <!-- Input para o usuário digitar a pesquisa -->
+            <input
+              class="p-2 sm:w-72 w-full rounded-l-lg text-base text-black bg-[#303134]"
+              type="text"
+              id="searchInput"
+              required="required"
+              placeholder="Digite o nome do filme ou série..."
+              on="input-throttled:AMP.setState({ query: event.value })"/>
+            <!-- Botão para redirecionar para a pesquisa no Google -->
+            <a
+              [href]="'https://www.google.com/search?q=' + query + '+ site:redecanais.ac&hl=pt-BR'"
+              target="_blank"
+              id="searchButton">
+              <button class="py-2 px-4 bg-[#0097b2] rounded-r-lg text-white border-none cursor-pointer text-base hover-bg-[#0056b3]" type="button">{% include "svgSearch.njk" %}</button>
+            </a>
+          </form> #}
+    </div>
+    <amp-mega-menu height="40" layout="fixed-height" class="text-white flex justify-center items-center">
+      <nav class="bg-[#141414] w-full">
+        <ul class="flex items-center justify-center">
+          <li>
+            <a href="/" class="sm:text-base text-sm px-4">Inicio</a>
+          </li>
+          <li class="menu-item">
+            <span role="button" class="sm:text-base text-sm sm:px-4 px-2">Series</span>
+            <div role="dialog">
+              <ol class="bg-[#141414] flex flex-col items-center gap-2 sm:px-4 px-2">
+                <li>
+                  <a href="/series/categorias/terror/">Terror</a>
+                </li>
+                <li>
+                  <a href="/series/categorias/comedia/">Comédia</a>
+                </li>
+                <li>
+                  <a href="/series/categorias/acao/">Ação</a>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li class="menu-item">
+            <span role="button" class="sm:text-base text-sm px-4">Filmes</span>
+            <div role="dialog">
+              <ol class="bg-[#181a1b] flex flex-col items-center gap-2 sm:px-4 px-2">
+                <li>
+                  <a href="/filmes/categorias/terror/">Terror</a>
+                </li>
+                <li>
+                  <a href="/filmes/categorias/comedia/">Comédia</a>
+                </li>
+                <li>
+                  <a href="/filmes/categorias/acao/">Ação</a>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li class="menu-item">
+            <span role="button" class="sm:text-base text-sm px-4">Animes</span>
+            <div role="dialog">
+              <ol class="bg-[#141414] flex flex-col items-center gap-2 sm:px-4 px-2">
+                <li>
+                  <a href="/series/categorias/terror/">Terror</a>
+                </li>
+                <li>
+                  <a href="/series/categorias/comedia/">Comédia</a>
+                </li>
+                <li>
+                  <a href="/series/categorias/acao/">Ação</a>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li class="menu-item">
+            <span role="button" class="sm:text-base text-sm px-4">Novelas</span>
+            <div role="dialog">
+              <ol class="bg-[#181a1b] flex flex-col items-center gap-2 sm:px-4 px-2">
+                <li>
+                  <a href="/series/categorias/terror/">Terror</a>
+                </li>
+                <li>
+                  <a href="/series/categorias/comedia/">Comédia</a>
+                </li>
+                <li>
+                  <a href="/series/categorias/acao/">Ação</a>
+                </li>
+              </ol>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </amp-mega-menu>
+  </header>

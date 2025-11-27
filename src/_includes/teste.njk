@@ -1,0 +1,11 @@
+<script>
+  const url = 'https://redecanais.ec/the-flash-1a-temporada-episodio-08-flash-vs-arrow_28dc16ff0.html';
+  $.get(url, function (data) {
+    const iframe = $(data).find('iframe[name="Player"]');
+    if (iframe.length > 0) {
+      console.log('SRC do iframe:', iframe.attr('src'));
+    } else {
+      console.log('Iframe com nome "Player" não encontrado.');
+    }
+  });
+</script>

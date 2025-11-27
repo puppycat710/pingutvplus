@@ -1,0 +1,33 @@
+---
+layout: layout.njk
+pagination:
+  data: categories
+  size: 1
+  alias: category
+permalink: "/series/categorias/{{ category.title | slug }}/index.html"
+---
+
+<div class="bg-[#0097b2] flex justify-center items-center py-10 text-4xl">
+  <h1>{{ category.title  }}</h1>
+</div>
+
+<div class="grid justify-center text-sm items-center p-4">
+  <amp-base-carousel
+    width="1200"
+    height="450"
+    class="sm:!w-[1200px] !w-[330px]"
+    layout="flex-item"
+    visible-count="(min-width: 800px) 4, 2"
+    advance-count="(min-width: 800px) 4, 2">
+    {% for serie in series -%}
+      {% if serie.categories and category.title in serie.categories %}
+      <a href="/series/{{serie.slug}}/">
+        <div class="flex flex-col gap-1 p-1">
+          <img src="{{serie.coverImage}}" width="226" height="316" alt="{{serie.title}}" ></img>
+          <h1>{{ serie.title }}</h1>
+        </div>
+      </a>
+      {% endif %}
+    {%- endfor %}
+  </amp-base-carousel>
+</div>

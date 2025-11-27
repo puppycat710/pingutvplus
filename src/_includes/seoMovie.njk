@@ -1,0 +1,11 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Movie",
+  "name": "{{movie.title}}",
+  "genre": [{% for category in movie.categories %}"{{ category }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+  "url": "https://pingutvplus.xyz/filmes/{{movie.slug}}/",
+  "inLanguage": "pt-BR",
+  "image": "{{movie.coverImage}}",
+}
+</script>

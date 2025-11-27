@@ -1,0 +1,20 @@
+<div class="grid justify-center gap-3 text-sm items-center p-4">
+  <h1 class="sm:text-lg text-sm pl-1">Novidades</h1>
+  <amp-base-carousel
+    width="1200"
+    height="360"
+    class="sm:!w-[1200px] !w-[330px]"
+    layout="flex-item"
+    visible-count="(min-width: 800px) 5, 2"
+    advance-count="(min-width: 800px) 5, 2">
+    {% for serie in series -%}
+      <a href="/series/{{ serie.slug }}/">
+        <div class="flex flex-col gap-1 p-1">
+          <amp-img src={{ serie.coverImage }} width="226" height="316" alt={{ serie.slug }} layout="responsive"></amp-img>
+          <h1 class="text-xs">{{ serie.title }}</h1>
+        </div>
+      </a>
+    {%- endfor %}
+  </amp-base-carousel>
+  <div id="container-ebf6406200b40ffad6f7de33e59200fa"></div>
+</div>

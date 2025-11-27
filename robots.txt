@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /test/
+Disallow: /drafts/
+Disallow: /node_modules/
+
+# Permitir indexação do restante do site
+Allow: /
+
+# Sitemap
+Sitemap: https://pingutvplus.xyz/sitemap.xml

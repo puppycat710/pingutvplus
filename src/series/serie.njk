@@ -15,31 +15,27 @@ permalink: "/series/{{ serie.slug }}/"
 <div>
   {# CAPA DE FUNDO #}
   <div class="flex justify-center">
-    <div
-      style="display: none;"
-      id="serie-banner"
-      class="bg-[url('{{ serie.coverImage }}')] w-full brightness-50 bg-center bg-no-repeat bg-cover flex justify-center
+    <div style="display: none;" id="serie-banner" class="bg-[url('{{ serie.coverImage }}')] w-full brightness-50 bg-center bg-no-repeat bg-cover flex justify-center
         hidden">
-      <amp-img loading="lazy" src={{ serie.coverImage }} width="226" height="316" alt={{ movie.title }} layout="responsive"></amp-img>
+      <amp-img loading="lazy" src={{ serie.coverImage }} width="226" height="316" alt={{ movie.title }}
+        layout="responsive"></amp-img>
     </div>
   </div>
   <xola-mais id="player"></xola-mais>
   <section class="flex flex-col justify-center items-center">
-    <main
-      class="w-[1200px] p-5 flex xl:flex-row flex-col justify-between xl:items-start items-center bg-[#1F1F1F]">
+    <main class="w-[1200px] p-5 flex xl:flex-row flex-col justify-between xl:items-start items-center bg-[#1F1F1F]">
       {# SERIE #}
-      <div
-        class="flex flex-col gap-5">
+      <div class="flex flex-col gap-5">
         {# TITULO #}
         <div class="flex flex-col gap-2">
           <h1 class="sm:text-3xl text-lg">{{ serie.title }}</h1>
           <div>
             {% if serie.seasons[0].episodes[0].links.dublado %}
-              <span class="text-[#a0a0a0] text-sm">Dublado</span>
+            <span class="text-[#a0a0a0] text-sm">Dublado</span>
             {% endif %}
             <span class="balls"></span>
             {% if serie.seasons[0].episodes[0].links.legendado %}
-              <span class="text-[#a0a0a0] text-sm">Legendado</span>
+            <span class="text-[#a0a0a0] text-sm">Legendado</span>
             {% endif %}
           </div>
         </div>
@@ -48,104 +44,122 @@ permalink: "/series/{{ serie.slug }}/"
           <p class="pingo-title sm:text-base text-sm font-medium" id="episode-info">Temporada
             {{ serie.seasons[0].seasonNumber }} Episódio {{ serie.seasons[0].episodes[0].episodeNumber }}:
             {{ serie.seasons[0].episodes[0].title }} (Dublado)</p>
-          <iframe
-            id="video-frame"
-            class="border-2 border-[#555555]"
-            width="720"
-            height="405"
-            scrolling="no"
-            frameborder="0"
-            allowFullScreen
-            allow="encrypted-media; autoplay; picture-in-picture"
-            src={{ serie.seasons[0].episodes[0].links.dublado }}></iframe>
+          <iframe id="video-frame" class="border-2 border-[#555555]" width="720" height="405" scrolling="no"
+            frameborder="0" allowFullScreen allow="encrypted-media; autoplay; picture-in-picture" src={{
+            serie.seasons[0].episodes[0].links.dublado }}></iframe>
           {# CATEGORIAS E TAGS {{ serie.seasons[0].episodes[0].links.dublado }} #}
           <div class="flex items-center gap-2 text-sm">
             Categoria:
             <div class="text-[#3170A5] font-normal font-bold">
               <a href="/series/categorias/todos/" class="hover:text-[#233D5E] active:underline">
                 {% for categoria in serie.categories %}
-                  {% set slug = categoria | replace("á", "a") | replace("ã", "a") | replace("â", "a") | replace("é", "e") | replace("ê", "e") | replace("í", "i") | replace("ó", "o") | replace("ô", "o") | replace("õ", "o") | replace("ú", "u") | replace("ç", "c") %}
-                  <a href="/series/categorias/{{ slug | lower }}/" class="hover:text-[#233D5E] active:underline">
-                    {{ categoria }}
-                  </a>
+                {% set slug = categoria | replace("á", "a") | replace("ã", "a") | replace("â", "a") | replace("é", "e")
+                | replace("ê", "e") | replace("í", "i") | replace("ó", "o") | replace("ô", "o") | replace("õ", "o") |
+                replace("ú", "u") | replace("ç", "c") %}
+                <a href="/series/categorias/{{ slug | lower }}/" class="hover:text-[#233D5E] active:underline">
+                  {{ categoria }}
+                </a>
                 {% endfor %}
-              </div>
             </div>
           </div>
-          {# TEMPORADAS #}
-          <div
-            class="flex flex-col gap-4">
-            {# SELECIONAR EP #}
-            <div class="flex sm:flex-row flex-col gap-4 sm:justify-start justify-center sm:items-center items-start">
-              {% set totalEpisodes = 0 %}
-              <select
-                class="bg-[#333] rounded p-2 hover:bg-[#4e4e4e] flex items-center justify-center"
-                on="change:AMP.setState({ option: event.value })">
-                <option value="0">Escolher temporada</option>
-                {% for season in serie.seasons %}
-                  {% set totalEpisodes = season.episodes | length %}
-                  <option value={{ season.seasonNumber }}>Temporada {{ season.seasonNumber }} • {{ totalEpisodes }} episódios</option>
-                {% endfor %}
-              </select>
-              {# IDIOMA #}
-              <fieldset class="flex items-center gap-2">
-                <label class="checkbox-container">
-                  <input type="radio" name="audio" checked on="tap:AMP.setState({myUpdateState:{ language: 'dublado' }})">
-                    <span class="text-checkbox hover:bg-[#4e4e4e]">Dublado</span>
-                  </input>
-                </label>
-                <label class="checkbox-container">
-                  <input type="radio" name="audio" on="tap:AMP.setState({myUpdateState:{ language: 'legendado' }})">
-                    <span class="text-checkbox hover:bg-[#4e4e4e]">Legendado</span>
-                  </input>
-                </label>
-              </fieldset>
-            </div>
-            {# ESPISODIOS POR TEMPORADA #}
-            {% for season in serie.seasons %}
-              <div hidden [hidden]="option != {{ season.seasonNumber }}" class="flex flex-col gap-1 py-3 text-[#BCBCBC]">
-                {% for episode in season.episodes %}
-                  {% if episode.links.dublado %}
-                    <div hidden [hidden]="myUpdateState.language != 'dublado'" class="play-episode-dublado flex cursor-pointer bg-[#272727] rounded hover:bg-[#4e4e4e]" data-src="{{ episode.links.dublado }}" data-season="Temporada {{ season.seasonNumber }}" data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}" data-language="Dublado">
-                      <div class="play-episode-child cursor-pointer w-12 h-12 flex flex-col justify-center items-center rounded-l bg-[#303134] group" data-src="{{ episode.links.dublado }}" data-season="Temporada {{ season.seasonNumber }}" data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}" data-language="Dublado">
-                        <div class="pointer-events-none inline-block my-0 ml-[4px] align-middle w-[8px] h-[16px] border-t-[10px] border-b-[10px]
-                          border-l-[10px] border-t-transparent border-b-transparent border-l-[#f1f1f1] group-hover:border-l-[#0097b2]"></div>
-                        {# <span class="pointer-events-none text-[10px] text-[#f1f1f1] group-hover:text-[#a0a0a0]">T{{ season.seasonNumber }} E{{ episode.episodeNumber }}</span> #}
-                      </div>
-                      <div class="pointer-events-none text-sm ml-2 font-normal flex flex-col justify-center">
-                        <span class="text-[#F1F1F1] font-medium">{{ episode.episodeNumber }}. {{ episode.title }}</span>
-                        <span class="text-xs pingo-title">Episódio {{ episode.episodeNumber }} (<span [text]="myUpdateState.language"></span>)</span>
-                      </div>
-                    </div>
-                  {% endif %}
-                  {% if episode.links.legendado %}
-                    <div hidden [hidden]="myUpdateState.language != 'legendado'" class="play-episode-legendado flex cursor-pointer bg-[#272727] rounded hover:bg-[#4e4e4e]" data-src="{{ episode.links.legendado }}" data-season="Temporada {{ season.seasonNumber }}" data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}" data-language="Legendado">
-                      <div class="play-episode-child cursor-pointer w-12 h-12 flex flex-col justify-center items-center rounded-l bg-[#303134] group" data-src="{{ episode.links.legendado }}" data-season="Temporada {{ season.seasonNumber }}" data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}" data-language="Legendado">
-                        <div class="pointer-events-none inline-block my-0 ml-[4px] align-middle w-[8px] h-[16px] border-t-[10px] border-b-[10px]
-                          border-l-[10px] border-t-transparent border-b-transparent border-l-[#f1f1f1] group-hover:border-l-[#0097b2]"></div>
-                        {# <span class="pointer-events-none text-[10px] group-hover:text-[#F1F1F1]">T{{ season.seasonNumber }} E{{ episode.episodeNumber }}</span> #}
-                      </div>
-                      <div class="pointer-events-none text-sm ml-2 font-normal flex flex-col justify-center">
-                        <span class="text-[#F1F1F1] font-medium">{{ episode.episodeNumber }}. {{ episode.title }}</span>
-                        <span class="text-xs pingo-title">Episódio {{ episode.episodeNumber }} (<span [text]="myUpdateState.language"></span>)</span>
-                      </div>
-                    </div>
-                  {% endif %}
-                {% endfor %}
+        </div>
+        {# TEMPORADAS #}
+        <div class="flex flex-col gap-4">
+          {# SELECIONAR EP #}
+          <div class="flex sm:flex-row flex-col gap-4 sm:justify-start justify-center sm:items-center items-start">
+            {% set totalEpisodes = 0 %}
+            <select class="bg-[#333] rounded p-2 hover:bg-[#4e4e4e] flex items-center justify-center"
+              on="change:AMP.setState({ option: event.value })">
+              <option value="0">Escolher temporada</option>
+              {% for season in serie.seasons %}
+              {% set totalEpisodes = season.episodes | length %}
+              <option value={{ season.seasonNumber }}>Temporada {{ season.seasonNumber }} • {{ totalEpisodes }}
+                episódios</option>
+              {% endfor %}
+            </select>
+            {# IDIOMA #}
+            <fieldset class="flex items-center gap-2">
+              <label class="checkbox-container">
+                <input type="radio" name="audio" checked on="tap:AMP.setState({myUpdateState:{ language: 'dublado' }})">
+                <span class="text-checkbox hover:bg-[#4e4e4e]">Dublado</span>
+                </input>
+              </label>
+              <label class="checkbox-container">
+                <input type="radio" name="audio" on="tap:AMP.setState({myUpdateState:{ language: 'legendado' }})">
+                <span class="text-checkbox hover:bg-[#4e4e4e]">Legendado</span>
+                </input>
+              </label>
+            </fieldset>
+          </div>
+          {# ESPISODIOS POR TEMPORADA #}
+          {% for season in serie.seasons %}
+          <div hidden [hidden]="option != {{ season.seasonNumber }}" class="flex flex-col gap-1 py-3 text-[#BCBCBC]">
+            {% for episode in season.episodes %}
+            {% if episode.links.dublado %}
+            <div hidden [hidden]="myUpdateState.language != 'dublado'"
+              class="play-episode-dublado flex cursor-pointer bg-[#272727] rounded hover:bg-[#4e4e4e]"
+              data-src="{{ episode.links.dublado }}" data-season="Temporada {{ season.seasonNumber }}"
+              data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}"
+              data-language="Dublado">
+              <div
+                class="play-episode-child cursor-pointer w-12 h-12 flex flex-col justify-center items-center rounded-l bg-[#303134] group"
+                data-src="{{ episode.links.dublado }}" data-season="Temporada {{ season.seasonNumber }}"
+                data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}"
+                data-language="Dublado">
+                <div
+                  class="pointer-events-none inline-block my-0 ml-[4px] align-middle w-[8px] h-[16px] border-t-[10px] border-b-[10px]
+                          border-l-[10px] border-t-transparent border-b-transparent border-l-[#f1f1f1] group-hover:border-l-[#0097b2]">
+                </div>
+                {# <span class="pointer-events-none text-[10px] text-[#f1f1f1] group-hover:text-[#a0a0a0]">T{{
+                  season.seasonNumber }} E{{ episode.episodeNumber }}</span> #}
               </div>
+              <div class="pointer-events-none text-sm ml-2 font-normal flex flex-col justify-center">
+                <span class="text-[#F1F1F1] font-medium">{{ episode.episodeNumber }}. {{ episode.title }}</span>
+                <span class="text-xs pingo-title">Episódio {{ episode.episodeNumber }} (<span
+                    [text]="myUpdateState.language"></span>)</span>
+              </div>
+            </div>
+            {% endif %}
+            {% if episode.links.legendado %}
+            <div hidden [hidden]="myUpdateState.language != 'legendado'"
+              class="play-episode-legendado flex cursor-pointer bg-[#272727] rounded hover:bg-[#4e4e4e]"
+              data-src="{{ episode.links.legendado }}" data-season="Temporada {{ season.seasonNumber }}"
+              data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}"
+              data-language="Legendado">
+              <div
+                class="play-episode-child cursor-pointer w-12 h-12 flex flex-col justify-center items-center rounded-l bg-[#303134] group"
+                data-src="{{ episode.links.legendado }}" data-season="Temporada {{ season.seasonNumber }}"
+                data-episode="Episódio {{ episode.episodeNumber }}" data-title="{{ episode.title }}"
+                data-language="Legendado">
+                <div
+                  class="pointer-events-none inline-block my-0 ml-[4px] align-middle w-[8px] h-[16px] border-t-[10px] border-b-[10px]
+                          border-l-[10px] border-t-transparent border-b-transparent border-l-[#f1f1f1] group-hover:border-l-[#0097b2]">
+                </div>
+                {# <span class="pointer-events-none text-[10px] group-hover:text-[#F1F1F1]">T{{ season.seasonNumber }}
+                  E{{ episode.episodeNumber }}</span> #}
+              </div>
+              <div class="pointer-events-none text-sm ml-2 font-normal flex flex-col justify-center">
+                <span class="text-[#F1F1F1] font-medium">{{ episode.episodeNumber }}. {{ episode.title }}</span>
+                <span class="text-xs pingo-title">Episódio {{ episode.episodeNumber }} (<span
+                    [text]="myUpdateState.language"></span>)</span>
+              </div>
+            </div>
+            {% endif %}
             {% endfor %}
           </div>
-        </div>
-        {# COMENTARIOS #}
-        <div class="xl:w-[390px] w-[720px] w-full flex flex-col text-center gap-4 py-12">
-          <div id="container-ebf6406200b40ffad6f7de33e59200fa"></div>
-          <p>COMENTARIOS PINGO TV</p>
-          <hr/>
-          <div id="disqus_thread"></div>
+          {% endfor %}
         </div>
       </div>
-    </main>
-  </section>
+      {# COMENTARIOS #}
+      <div class="xl:w-[390px] w-[720px] w-full flex flex-col text-center gap-4 py-12">
+        <div id="container-da5116b7260295a6a673c47a524c6fc9"></div>
+        <p>COMENTARIOS PINGO TV</p>
+        <hr />
+        <div id="disqus_thread"></div>
+      </div>
+</div>
+</main>
+</section>
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {

@@ -5,6 +5,27 @@
     "coverImage": "/images/stranger-things-5-temporada.jpg",
     "seasons": [
       {
+        "seasonNumber": 1,
+        "episodes": [
+          {
+            "episodeNumber": 1,
+            "title": "Episódio 1",
+            "links": {
+              "legendado": "Capítulo Um: O Desaparecimento de Will Byers",
+              "dublado": "https://redecanais.bh/player3/server.php?categoria=vod&server=RCServer11&subfolder=ondemand&vid=STRNGRTHNGT01EP01"
+            }
+          },
+          {
+            "episodeNumber": 2,
+            "title": "Capítulo Dois: A Estranha da Maple Street",
+            "links": {
+              "legendado": "",
+              "dublado": "https://redecanais.bh/player3/server.php?categoria=vod&server=RCServer11&subfolder=ondemand&vid=STRNGRTHNGT01EP01"
+            }
+          }
+        ]
+      },
+      {
         "seasonNumber": 5,
         "episodes": [
           {

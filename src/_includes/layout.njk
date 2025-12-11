@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html amp lang="pt-br">
-  <head>
-    {% include "seo.njk" %}
-    <script type="application/ld+json">
+
+<head>
+  {% include "seo.njk" %}
+  <script type="application/ld+json">
       {
         "@context": "http://schema.org",
         "@type": "WebSite",
@@ -13,89 +14,102 @@
         "inLanguage": "pt-BR"
       }
     </script>
-    <!-- AMP -->
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-base-carousel" src="https://cdn.ampproject.org/v0/amp-base-carousel-0.1.js"></script>
-    <script async custom-element="amp-mega-menu" src="https://cdn.ampproject.org/v0/amp-mega-menu-0.1.js"></script>
-    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    {% include "styles.njk" %}
+  <!-- AMP -->
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-base-carousel"
+    src="https://cdn.ampproject.org/v0/amp-base-carousel-0.1.js"></script>
+  <script async custom-element="amp-mega-menu" src="https://cdn.ampproject.org/v0/amp-mega-menu-0.1.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  {% include "styles.njk" %}
+  <style amp-boilerplate>
+    body {
+      -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      animation: -amp-start 8s steps(1, end) 0s 1 normal both
+    }
+
+    @-webkit-keyframes -amp-start {
+      from {
+        visibility: hidden
+      }
+
+      to {
+        visibility: visible
+      }
+    }
+
+    @-moz-keyframes -amp-start {
+      from {
+        visibility: hidden
+      }
+
+      to {
+        visibility: visible
+      }
+    }
+
+    @-ms-keyframes -amp-start {
+      from {
+        visibility: hidden
+      }
+
+      to {
+        visibility: visible
+      }
+    }
+
+    @-o-keyframes -amp-start {
+      from {
+        visibility: hidden
+      }
+
+      to {
+        visibility: visible
+      }
+    }
+
+    @keyframes -amp-start {
+      from {
+        visibility: hidden
+      }
+
+      to {
+        visibility: visible
+      }
+    }
+  </style>
+  <noscript>
     <style amp-boilerplate>
       body {
-        -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-        -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-        -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-        animation: -amp-start 8s steps(1, end) 0s 1 normal both
-      }
-      @-webkit-keyframes -amp-start {
-        from {
-          visibility: hidden
-        }
-        to {
-          visibility: visible
-        }
-      }
-      @-moz-keyframes -amp-start {
-        from {
-          visibility: hidden
-        }
-        to {
-          visibility: visible
-        }
-      }
-      @-ms-keyframes -amp-start {
-        from {
-          visibility: hidden
-        }
-        to {
-          visibility: visible
-        }
-      }
-      @-o-keyframes -amp-start {
-        from {
-          visibility: hidden
-        }
-        to {
-          visibility: visible
-        }
-      }
-      @keyframes -amp-start {
-        from {
-          visibility: hidden
-        }
-        to {
-          visibility: visible
-        }
+        -webkit-animation: none;
+        -moz-animation: none;
+        -ms-animation: none;
+        animation: none
       }
     </style>
-    <noscript>
-      <style amp-boilerplate>
-        body {
-          -webkit-animation: none;
-          -moz-animation: none;
-          -ms-animation: none;
-          animation: none
-        }
-      </style>
-    </noscript>
-    {% include "adsense.njk" %}
-    {% include "devTool.njk" %}
-  </head>
-  <body>
-    {% include "headerMenu.njk" %}
-    <div [hidden]="search != 1">
-      {{ content | safe }}
-    </div>
-    <div hidden [hidden]="search != 2">
-      <div id="movie-list" class="grid justify-center text-sm items-center p-4"></div>
-    </div>
-    <div id="container-ebf6406200b40ffad6f7de33e59200fa"></div>
-    {% include "footer.njk" %}
-    <!-- Carregue o JS após o HTML -->
-    <script defer src="/js/monetag-vignatte.js" defer></script>
-    <script defer src="/js/matomo.js" defer></script>
-    <script defer src="/js/search.js"></script>
-    <script defer src="/js/amp.js"></script>
-  </body>
+  </noscript>
+  {% include "adsense.njk" %}
+  {% include "devTool.njk" %}
+</head>
+
+<body>
+  {% include "headerMenu.njk" %}
+  <div [hidden]="search != 1">
+    {{ content | safe }}
+  </div>
+  <div hidden [hidden]="search != 2">
+    <div id="movie-list" class="grid justify-center text-sm items-center p-4"></div>
+  </div>
+  <div id="container-da5116b7260295a6a673c47a524c6fc9"></div>
+  {% include "footer.njk" %}
+  <!-- Carregue o JS após o HTML -->
+  <script defer src="/js/monetag-vignatte.js" defer></script>
+  <script defer src="/js/matomo.js" defer></script>
+  <script defer src="/js/search.js"></script>
+  <script defer src="/js/amp.js"></script>
+</body>
+
 </html>

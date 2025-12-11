@@ -1,4 +1,4 @@
-const trustedOrigins = ['https://pingutvplus.xyz'] // Adicione suas origens confiáveis aqui
+const trustedOrigins = ['https://pingutvplus.vercel.app'] // Adicione suas origens confiáveis aqui
 
 window.addEventListener(
 	'message',
@@ -27,7 +27,7 @@ function receiveMessage(event) {
 				{
 					sentinel: 'amp',
 					type: 'embed-size',
-					height: msg.data.height,
+					height: msg.data.height
 				},
 				'*'
 			)
